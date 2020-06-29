@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200507151844_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507151844_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200507152025_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507152025_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200507152109_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507152109_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200507152209_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507152209_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200507152507_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507152507_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200507152658_Adding_Identity_Extended.cs" />
+    <Compile Remove="Migrations\20200507152658_Adding_Identity_Extended.Designer.cs" />
+    <Compile Remove="Migrations\20200518194650_testIdentity.cs" />
+    <Compile Remove="Migrations\20200518194650_testIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200518195311_testIdentity2.cs" />
+    <Compile Remove="Migrations\20200518195311_testIdentity2.Designer.cs" />
+    <Compile Remove="Migrations\20200518195537_testIdentity_2.cs" />
+    <Compile Remove="Migrations\20200518195537_testIdentity_2.Designer.cs" />
+    <Compile Remove="Migrations\20200518200741_Init.cs" />
+    <Compile Remove="Migrations\20200518200741_Init.Designer.cs" />
+    <Compile Remove="Migrations\20200518201557_testIdentityWithExistingData.cs" />
+    <Compile Remove="Migrations\20200518201557_testIdentityWithExistingData.Designer.cs" />
+    <Compile Remove="Migrations\20200518202604_testIdentityWithExistingData1.cs" />
+    <Compile Remove="Migrations\20200518202604_testIdentityWithExistingData1.Designer.cs" />
+    <Compile Remove="Migrations\20200518202644_testIdentityWithExistingData2.cs" />
+    <Compile Remove="Migrations\20200518202644_testIdentityWithExistingData2.Designer.cs" />
+    <Compile Remove="Migrations\20200518202905_testIdentityWithExistingData3.cs" />
+    <Compile Remove="Migrations\20200518202905_testIdentityWithExistingData3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZOI.DAL\ZOI.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

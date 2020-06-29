@@ -1,0 +1,95 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ZOI FINTECH SERVICES</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport">
+    <meta name="description" content="" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link href="~/favicon.ico" rel="shortcut icon">
+
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,500,700&display=swap" rel="stylesheet">
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Assets/css/site.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="loginBox">
+        <div class="loginBoxMain">
+            <ul class="row">
+                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="logBg">
+                        <div class="logLogo">
+                            <img src="~/Assets/images/img82.png" />
+                            ZOI FINTECH<br> SERVICES
+                        </div>
+                    </div>
+                </li>
+                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <ul class="">
+                        <li class="">
+                            <h4>Login</h4>
+                        </li>
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+                        {
+                            <li class=" wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                                @*<input class="input100" type="text" name="email">*@
+                                @Html.TextBoxFor(m => m.Email, new { @class = "input100", name = "email" })
+                                <span class="focus-input100" data-placeholder="User Name"></span>
+
+                            </li>
+                            @Html.AntiForgeryToken()
+                            <li class=" wrap-input100 validate-input" data-validate="Enter password">
+                                <span class="btn-show-pass">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </span>
+                                @*<input class="input100" type="password" name="pass">*@
+                                @Html.PasswordFor(m => m.Password, new { @class = "input100", name = "pass" })
+                                <span class="focus-input100" data-placeholder="Password"></span>
+                            </li>
+                            <li>
+                                <div class="checkBoxMain">
+                                    <label class="checkBoxBox">
+                                        <span class="txtCheck">@Html.DisplayNameFor(m => m.RememberMe)</span>
+                                        <input type="checkbox" asp-for="@Model.RememberMe">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <button type="submit" class="btn subBtn">Submit</button>
+                            </li>
+                            <li>
+                                <div class="forGot"><a href="#">Forgot User Name</a> / <a href="#">Password</a></div>
+                            </li>
+                            <li>
+                                <div asp-validation-summary="All" class="errorTxt"></div>
+                            </li>
+
+                        }
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="logFooter">
+            <footer>
+                <div class="FL">Developed by: <a href="#"><strong>ZOI FINTECH SERVICES</strong></a></div>
+
+                <div class="FR">Copyright © 2019-2020.  All Rights Reserved <a href="#" class="pl-3">Privacy Policy</a></div>
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/custom.js"></script>
+</body>
+</html>
