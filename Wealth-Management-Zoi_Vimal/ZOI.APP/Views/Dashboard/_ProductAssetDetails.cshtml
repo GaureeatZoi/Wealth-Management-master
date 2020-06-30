@@ -1,0 +1,104 @@
+﻿@model ZOI.BAL.Models.ProductAssetCharts
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form_charts", @enctype = "multipart/form-data", @style = "font-family:poppins,sans-serif;" }))
+{
+    <style>
+        @@media only screen and (max-width: 1024px) {
+            .charts {
+                height: auto;
+                width: auto;
+            }
+        }
+        
+        @@media only screen and (max-width: 1440px) {
+            .charts {
+               width: 400px; 
+               height: 400px;
+            }
+        }
+    </style>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="charts" id="return_piechart"></div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="charts" id="market_value_piechart"></div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="charts" id="cost_of_avg_piechart"></div>
+    </div>
+
+}
+<script src="~/Assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var return_data = google.visualization.arrayToDataTable([
+            ['Task', 'Return'],
+            @foreach (var item in Model.Return) {
+                <Text>
+                    ['@item.Name', @item.Value],
+                </Text>
+                }
+        ]);
+
+        return_chart_colors = ['#52b7e9', '#f4607b', '#b0c0c4', '#fcd460', '#b084ed'];
+
+        var return_options = {
+            title: 'Return',
+            pieHole: 0.3,
+            colors: return_chart_colors
+        };
+
+                var market_value = google.visualization.arrayToDataTable([
+
+                    ['Task', 'Hours per Day'],
+
+                    @foreach (var item in Model.Marketvalue) {
+                <Text>
+                    ['@item.Name', @item.Value],
+                </Text>
+                }
+        ]);
+
+        market_value_chart_colors = ['#e52623', '#edb99c', '#244e92', '#5474a4', '#b4a8d0'];
+
+        var market_value_options = {
+            title: 'Market Value',
+            // is3D: true,
+            pieHole: 0.3,
+            colors: market_value_chart_colors
+        };
+
+                var cast_of_average = google.visualization.arrayToDataTable([
+
+                    ['Task', 'Hours per Day'],
+
+                     @foreach (var item in Model.CostOfAverage) {
+                <Text>
+                    ['@item.Name', @item.Value],
+                </Text>
+                }
+        ]);
+
+        cast_of_average_chart_colors = ['#e58f23', '#fce4db', '#1ac1b5', '#849d9b', '#b1c3c2'];
+
+        var cast_of_average_options = {
+            title: 'Cast Of Average',
+            // is3D: true,
+            pieHole: 0.3,
+            colors: cast_of_average_chart_colors
+        };
+
+                var return_chart = new google.visualization.PieChart(document.getElementById('cost_of_avg_piechart'));
+                return_chart.draw(return_data, return_options);
+
+        var market_chart = new google.visualization.PieChart(document.getElementById('market_value_piechart'));
+                market_chart.draw(market_value, market_value_options);
+
+        var cast_of_average_chart = new google.visualization.PieChart(document.getElementById('return_piechart'));
+                cast_of_average_chart.draw(cast_of_average, cast_of_average_options);
+    }
+</script>

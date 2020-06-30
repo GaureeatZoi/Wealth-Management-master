@@ -1,0 +1,31 @@
+﻿<div id="slider"></div>
+<link href="~/Assets/css/iThing.css" rel="stylesheet" />
+<script src="~/Assets/lib/jquery/dist/jquery.js"></script>
+<script src="~/jqueryui/jquery-ui.js"></script>
+<script src="~/Assets/js/jQAllRangeSliders-withRuler-min.js"></script>
+<script>
+    //<!--
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    var current_date = new Date();
+    $("#slider").dateRangeSlider({
+        bounds: { min: new Date(current_date.getFullYear(), 0, 01), max: new Date(current_date.getFullYear(), 11, 31, 12, 59, 59) },
+        defaultValues: { min: new Date(2020, current_date.getMonth(), current_date.getDate()), max: new Date(2020, current_date.getMonth() + 1, current_date.getDate()) },
+        scales: [{
+            first: function (value) { return value; },
+            end: function (value) { return value; },
+            next: function (value) {
+                var next = new Date(value);
+                return new Date(next.setMonth(value.getMonth() + 1));
+            },
+            label: function (value) {
+                return months[value.getMonth()];
+            },
+            format: function (tickContainer, tickStart, tickEnd) {
+                tickContainer.addClass("myCustomClass");
+            }
+        }]
+    });
+
+
+    //-->
+</script>

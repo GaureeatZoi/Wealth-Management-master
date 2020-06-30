@@ -1,0 +1,142 @@
+﻿@inject SignInManager<ZOI.BAL.Models.ApplicationUser> signManager;
+@inject UserManager<ZOI.BAL.Models.ApplicationUser> userManager;
+@{
+    var userId = string.Empty;
+    if (signManager.IsSignedIn(User))
+    {
+        var user = await userManager.GetUserAsync(User);
+        userId = user.Id;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ZOI FINTECH SERVICES</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport">
+    <meta name="description" content="" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link href="favicon.ico" rel="shortcut icon">
+
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,500,700&display=swap" rel="stylesheet">
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Assets/css/site.css" rel="stylesheet">
+
+    <link href="~/Material Design/css/vendor.bundle.css" rel="stylesheet" />
+    <link href="~/Material Design/css/app.bundle.css" rel="stylesheet" />
+    <link href="~/Material Design/css/googlefonts.css" rel="stylesheet" />
+    <link href="~/Material Design/css/theme-a.css" rel="stylesheet" />
+    <link href="~/Material Design/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Material Design/css/layout-style.css" rel="stylesheet" />
+    <link href="~/Material Design/css/toastr.css" rel="stylesheet" />
+    <link href="~/Assets/css/daterangepicker.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" />
+
+</head>
+<body>
+    <header>
+        <div class="overlayer"></div>
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="#"><img src="~/Assets/images/logo.png"> <span> ZOI FINTECH SERVICES</span></a>
+            </div>
+            @if (signManager.IsSignedIn(User))
+            {
+<div class="userIcn">
+    <div class="dropdown">
+        <a href="#" class="dropdownLink"><img src="~/Assets/images/img1.png"></a>
+        <div class="userOpen dropdown-menu">
+            <div class="userProBox">
+                <img src="~/Assets/images/img37.png" class="userProImg" />
+                @*<label class="custom-file-input">
+                        <input type="file">
+                    </label>*@
+            </div>
+            <div class="userBox">
+                <div class="userName">@User.Identity.Name</div>
+                <a href="#" class="userId"><span>User Id:</span> <strong>@userId</strong></a>
+                @*<a href="#" class="userEma"></a>*@
+            </div>
+            <div class="clearfix"></div>
+            <div class="singOutBox">
+                <form method="post">
+                    <input type="submit" asp-action="Logout" asp-controller="Account" class="btn" value="SignOut" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div> }
+else
+{
+<div class="userIcn">
+    <ul class="headerMenu">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    </ul>
+</div>
+                <div class="userIcn">
+                    <ul class="headerMenu">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="TransactionReport">TRANSACTION REPORT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="DividentReport">DIVIDEND REPORT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="CorpusInOutReport">CORPUS IN/OUT REPORT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="InterestStatement">INTEREST STATEMENT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="MaturityReport">MATURITY REPORT (MATURING IN NEXT 30 DAYS)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="CashSummary">CASH SUMMARY</a>
+                        </li>
+
+                    </ul>
+                </div>            }
+        </div>
+    </header>
+    <div class="container mt-30 pt-60">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="FL">Developed by: <a href="#"><strong>ZOI FINTECH SERVICES</strong></a></div>
+
+        <div class="FR">Copyright © 2019-2020.  All Rights Reserved <a href="#" class="pl-3">Privacy Policy</a></div>
+    </footer>
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/image-uploader.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/multi-selector.js"></script>
+    <script type="text/javascript" src="~/Assets/js/custom.js"></script>
+
+    <script src="~/Material Design/js/vendor.bundle.js"></script>
+    <script src="~/Material Design/js/app.bundle.js"></script>
+    <script src="~/Material Design/js/utility.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="~/Assets/js/daterangepicker.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

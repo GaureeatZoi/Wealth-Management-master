@@ -1,0 +1,364 @@
+﻿.chart-div {
+    position: relative;
+}
+
+.loader1 {
+    display: inline-block;
+    font-size: 0px;
+    padding: 0px;
+    position: absolute;
+    z-index: 9;
+    margin-top: 150px;
+}
+
+    .loader1 span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 3px 2px;
+        -webkit-animation: loader1 0.8s linear infinite alternate;
+        animation: loader1 0.8s linear infinite alternate;
+    }
+
+        .loader1 span:nth-child(1) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.6);
+        }
+
+        .loader1 span:nth-child(2) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .loader1 span:nth-child(3) {
+            -webkit-animation-delay: -0.26666s;
+            animation-delay: -0.26666s;
+            background: rgba(245, 103, 115,1);
+        }
+
+        .loader1 span:nth-child(4) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .loader1 span:nth-child(5) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.4);
+        }
+
+@keyframes loader1 {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes loader1 {
+    from {
+        -webkit-transform: scale(0, 0);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+    }
+}
+
+.asset-data-table {
+    position: relative
+}
+
+.cash-flow-datat-table {
+    position: relative
+}
+
+.asset-loader {
+    display: inline-block;
+    font-size: 0px;
+    padding: 0px;
+    position: absolute;
+    z-index: 9;
+    margin-top: 150px;
+}
+
+    .asset-loader span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 3px 2px;
+        -webkit-animation: loader1 0.8s linear infinite alternate;
+        animation: loader1 0.8s linear infinite alternate;
+    }
+
+        .asset-loader span:nth-child(1) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.6);
+        }
+
+        .asset-loader span:nth-child(2) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .asset-loader span:nth-child(3) {
+            -webkit-animation-delay: -0.26666s;
+            animation-delay: -0.26666s;
+            background: rgba(245, 103, 115,1);
+        }
+
+        .asset-loader span:nth-child(4) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .asset-loader span:nth-child(5) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.4);
+        }
+
+@keyframes asset-loader {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes asset-loader {
+    from {
+        -webkit-transform: scale(0, 0);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+    }
+}
+
+/*cash flow*/
+.cash-flow-loader {
+    display: inline-block;
+    font-size: 0px;
+    padding: 0px;
+    position: absolute;
+    z-index: 9;
+    margin-top: 150px;
+}
+
+    .cash-flow-loader span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 3px 2px;
+        -webkit-animation: loader1 0.8s linear infinite alternate;
+        animation: loader1 0.8s linear infinite alternate;
+    }
+
+        .cash-flow-loader span:nth-child(1) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.6);
+        }
+
+        .cash-flow-loader span:nth-child(2) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .cash-flow-loader span:nth-child(3) {
+            -webkit-animation-delay: -0.26666s;
+            animation-delay: -0.26666s;
+            background: rgba(245, 103, 115,1);
+        }
+
+        .cash-flow-loader span:nth-child(4) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .cash-flow-loader span:nth-child(5) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.4);
+        }
+
+@keyframes cash-flow-loader {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes cash-flow-loader {
+    from {
+        -webkit-transform: scale(0, 0);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+    }
+}
+
+/*Slider*/
+.slider-div-loader {
+    display: inline-block;
+    font-size: 0px;
+    padding: 0px;
+    position: absolute;
+    z-index: 9;
+    margin-top: 100px;
+}
+
+    .slider-div-loader span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 3px 2px;
+        -webkit-animation: loader1 0.8s linear infinite alternate;
+        animation: loader1 0.8s linear infinite alternate;
+    }
+
+        .slider-div-loader span:nth-child(1) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.6);
+        }
+
+        .slider-div-loader span:nth-child(2) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .slider-div-loader span:nth-child(3) {
+            -webkit-animation-delay: -0.26666s;
+            animation-delay: -0.26666s;
+            background: rgba(245, 103, 115,1);
+        }
+
+        .slider-div-loader span:nth-child(4) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .slider-div-loader span:nth-child(5) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.4);
+        }
+
+@keyframes slider-div-loader {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes slider-div-loader {
+    from {
+        -webkit-transform: scale(0, 0);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+    }
+}
+
+/*Filter*/
+.filter-div-loader {
+    display: inline-block;
+    font-size: 0px;
+    padding: 0px;
+    position: absolute;
+    z-index: 9;
+    margin-top: 0px;
+}
+
+    .filter-div-loader span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 3px 2px;
+        -webkit-animation: loader1 0.8s linear infinite alternate;
+        animation: loader1 0.8s linear infinite alternate;
+    }
+
+        .filter-div-loader span:nth-child(1) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.6);
+        }
+
+        .filter-div-loader span:nth-child(2) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .filter-div-loader span:nth-child(3) {
+            -webkit-animation-delay: -0.26666s;
+            animation-delay: -0.26666s;
+            background: rgba(245, 103, 115,1);
+        }
+
+        .filter-div-loader span:nth-child(4) {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+            background: rgba(245, 103, 115,0.8);
+        }
+
+        .filter-div-loader span:nth-child(5) {
+            -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+            background: rgba(245, 103, 115,0.4);
+        }
+
+@keyframes filter-div-loader {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+@-webkit-keyframes filter-div-loader {
+    from {
+        -webkit-transform: scale(0, 0);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+    }
+}

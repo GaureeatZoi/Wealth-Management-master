@@ -1,0 +1,198 @@
+﻿@model IEnumerable<ZOI.BAL.Models.MfReports>
+
+<h1>CORPUS IN/OUT REPORT</h1>
+<div class="col-12 border p-3">
+    <form>
+        <div class="dashboard-filters">
+            @*filter details comes here*@
+        </div>
+        <table class="table table-bordered" width="100%">
+
+
+            <tr>
+                <td>
+                    AMCs
+                    <select id="AMC" name="AMC">
+                        <option value="">All</option>
+                        <option value="Franklin Templeton Mutual Fund">Franklin Templeton Mutual Fund</option>
+                        <option value="ICICI Prudential">ICICI Prudential</option>
+                        <option value="PGIM">PGIM</option>
+                        <option value="Aditya Birla Sun Life Mutual Fund">Aditya Birla Sun Life Mutual Fund</option>
+                        <option value="Indiabulls">Indiabulls</option>
+                        <option value="SBI Mutual Fund">SBI Mutual Fund</option>
+                        <option value="Kotak Mahindra Mutual Fund">Kotak Mahindra Mutual Fund</option>
+                        <option value="L&T Mutual Fund">L&T Mutual Fund</option>
+                    </select>
+                </td>
+                <td>
+                    Product
+                    <select id="Product" name="Products">
+                        <option value="Mutual Fund">Mutual Fund</option>
+                    </select>
+                </td>
+                <td>
+                    Transaction Type
+                    <select id="TranType" name="TranType">
+                        <option value="" selected>All</option>
+                        <option value="Corpus">Corpus</option>
+                        <option value="Corp. Action">Corp. Action</option>
+                        <option value="Market">Market</option>
+                        <option value="SIP">SIP</option>
+                    </select>
+
+                </td>
+                <td>
+                    Type
+                    <select id="#Type" name="Types">
+                        @*<option value="All" selected>All</option>
+                        <option value="Dept">Dept</option>
+                        <option value="Equity">Equity</option>
+                        <option value="Balance">Balance</option>
+                        <option value="Blue Chip">Blue Chip</option>
+                        <option value="Mid Cap">Mid Cap</option>*@
+                    </select>
+                    <a id="Search" formaction="POST" class='btn btn-success text-white' style='cursor:pointer; width:70px;'>
+                        Search
+                    </a>
+                    @*<Submit formaction="Get" id="GetData" Name="Search" action="/MFReport/GetMffiltereddata">Search</Submit>*@
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="col-12  border p-3">
+    <table id="DT_load" class="table table-striped table-bordered display responsive nowrap" width="100%">
+        <thead>
+            <tr>
+                <th>AMC / Exchange</th>
+                <th>Security/ Scheme</th>
+                <th>Folio	</th>
+                <th>Category</th>
+                <th>In-Transit</th>
+                <th>Buy/Sell</th>
+                <th>Date</th>
+                <th>Qty / Unit</th>
+                <th>NAV/ Rate</th>
+                <th>Value</th>
+                <th> Maturity Date</th>
+            </tr>
+
+        </thead>
+
+    </table>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+            var DataTable;
+
+        $(document).ready(function () {
+
+            $('.selectdropdown').on('change', function (event) {
+                $(this).parent().toggleClass('open');
+            });
+
+            
+            getAjax('@Url.Action("GetFilters")', { }, function (response, ct) {
+                if (ct == 'html') {
+                    $(".dashboard-filters").append(response);
+                    $(".filter-loader").hide();
+                    $(".toggle-placement").show();
+                }
+            });
+
+                loadDataTable();
+
+            $("#Search").click(function () {
+                var data_array = $("#txt_report_date").val().split('-');
+                var from_date = (data_array[0]);
+                var to_date = (data_array[1]);
+
+                var dtfrom = from_date;
+                var dtto = to_date;
+                    var amc = $('#AMC').val();
+                    var trantype = $('#TranType').val();
+                    $.ajax({
+                        "responsive": true,
+                        "processing": true,
+                        "serverSide": true,
+                        "serverMethod": "POST",
+                        "url": "/Dashboard/GetCashSummarydata",
+                        // "data": FormData,
+                        //"type": "GET",
+                        "dataSrc": "",
+                        "datatype": "json",
+                        "data": {
+                            DtFrom: dtfrom,
+                            DtTo: dtto,
+                            AMC: amc,
+                            Trantype: trantype
+                        },
+                        "success": function (newdata) {
+                            DataTable.clear().draw();
+                            DataTable.rows.add(newdata); // Add new data
+                            DataTable.columns.adjust().draw();//Redraw
+                        }
+                    })
+                })
+
+            });
+            function loadDataTable() {
+                DataTable = $('#DT_load').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'colvis'
+                    ],
+
+                    "ajax": {
+                        "responsive": true,
+                        "processing": true,
+                        "serverSide": true,
+                        "serverMethod": "POST",
+                        "url": "/Dashboard/GetCashSummarydata",
+                        // "data": FormData,
+                        //"type": "GET",
+                        "dataSrc": "",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "amc" },
+                        { "data": "scheme" },
+                        { "data": "folio" },
+                        { "data": "category" },
+                        { "data": "inTransit" },
+                        { "data": "buyOrSell" },
+                        { "data": "date" },
+                        { "data": "unit" },
+                        { "data": "nav" },
+                        { "data": "value" },
+                        { "data": "maturityDate" },
+                    ],
+                    "language": {
+                        "emptyTable": "no data found"
+                    },
+
+
+                    "width": "100%",
+
+
+
+                }//,
+
+
+
+                );
+
+
+
+            }
+
+
+
+
+    </script>
+
+
+}

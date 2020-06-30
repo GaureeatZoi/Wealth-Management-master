@@ -1,0 +1,73 @@
+﻿@model ZOI.BAL.Models.DashboardFilters
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form_filters", @enctype = "multipart/form-data", @style = "font-family:poppins,sans-serif;" }))
+{
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group is-empty">
+                <label class="control-label">
+                    @Html.LabelFor(e => e.CustomerLevel)
+                </label>
+                @Html.DropDownListFor(e => e.CustomerLevel, Model.CustomerLevelList, "--Select--", new { @class = "form-control field-space", @data_live_search = "true", @id = "ddl_customer_level" })
+            </div>
+            @Html.ValidationMessageFor(e => e.CustomerLevel, "", new { @class = "selectdropdown-validation-error", @style = "margin-top:-41px" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group is-empty">
+                <label class="control-label">
+                    @Html.LabelFor(e => e.ProtoTypeLevel)
+                </label>
+                @Html.DropDownListFor(e => e.ProtoTypeLevel, Model.ProtoTypeLevelList, "--Select--", new { @class = "form-control field-space", @data_live_search = "true", @id = "ddl_customer_proto_type" })
+            </div>
+            @Html.ValidationMessageFor(e => e.ProtoTypeLevel, "", new { @class = "selectdropdown-validation-error", @style = "margin-top:-41px" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group is-empty">
+                <label class="control-label">
+                    @Html.LabelFor(e => e.AccountLevel)
+                </label>
+                @Html.DropDownListFor(e => e.AccountLevel, Model.AccountLevelList, "--Select--", new { @class = "form-control field-space", @data_live_search = "true", @id = "ddl_account_level" })
+            </div>
+            @Html.ValidationMessageFor(e => e.AccountLevel, "", new { @class = "selectdropdown-validation-error", @style = "margin-top:-41px" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group is-empty">
+                <label class="control-label">@Html.LabelFor(e => e.ReportDate)</label>
+                @Html.TextBoxFor(e => e.ReportDate, new { @id = "txt_report_date", @class = "form-control field-space", @MaxLength = "100" })
+            </div>
+            @Html.ValidationMessageFor(e => e.ReportDate)
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script>
+    $(function() {
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#txt_report_date').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#txt_report_date').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+});
+</script>

@@ -1,0 +1,407 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<link href="~/Assets/css/Loader.css" rel="stylesheet" />
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    .wrapper {
+        width: 100%;
+    }
+
+    .dataTables_filter {
+        display: none;
+    }
+
+    .dataTables_length {
+        display: none;
+    }
+
+    sub {
+        font-size: 50%;
+    }
+
+    b {
+        margin-left: 23px;
+        font-size: 35px;
+        color: cornflowerblue;
+        margin-top: 20px;
+    }
+
+    .slider-details {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .pagination {
+        display: none;
+    }
+
+    .grid-section {
+        margin-top: 0px;
+    }
+
+    .toggle-placement {
+        margin-right: 35px;
+    }
+
+    .refresh-alignment {
+        margin-left: 565px;
+    }
+
+        .refresh-alignment :hover {
+            cursor: pointer;
+        }
+
+    @@media only screen and (max-width: 1440px) {
+        .chart-div {
+            height: 419px;
+            width: 1231px;
+        }
+    }
+
+    @@media only screen and (max-width: 1024px) {
+        .chart-div {
+            height: auto;
+            width: auto;
+        }
+    }
+</style>
+
+
+<div id="content" class="container-fluid">
+    <div class="content-body">
+        <div class="card">
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center filter-loader" style="display: none ">
+                            <div class="filter-div-loader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="dashboard-filters">
+                            @*filter details comes here*@
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="chart-div">
+                            <div class="text-center chart-loader" style="display:none">
+                                <div class="loader1">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="row float-right toggle-placement" style="display:none">
+                                <span>Product / Asset &nbsp;</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggle_products_assets" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <br />
+                            <div class="row charts-section">
+                                @* @await Html.PartialAsync("_ProductAssetDetails")*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center slider-loader" style="display:none">
+                            <div class="slider-div-loader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="harixantal-slider">
+                            <div class="text-center">
+                                (Slider of last 30 days – only of last 30 days )
+                            </div>
+                            <div class="slider-details">
+
+                            </div>
+                        </div>
+                        <div style="margin-top:10%">
+                            @await Html.PartialAsync("_DateRange")
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <div class="row grid-section">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 asset-data-table">
+                                    <div class="text-center asset-data-table-loader">
+                                        <div class="asset-loader">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <span class="refresh-alignment" id="asset_refresh"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+                                    <table class="table table-striped table-bordered dt-responsive" cellspacing="0" style="width: 100%;font-family:poppins,sans-serif;" id="asset_datatable"></table>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cash-flow-datat-table">
+                                    <div class="text-center cash-flow-datat-table-loader">
+                                        <div class="cash-flow-loader">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <span class="refresh-alignment" id="cash_flow_refresh"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+                                    <table class="table table-striped table-bordered dt-responsive" cellspacing="0" style="width: 100%;font-family:poppins,sans-serif;" id="Cash_flow_datatable"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="~/Assets/js/daterangepicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+            $('.selectdropdown').on('change', function (event) {
+                $(this).parent().toggleClass('open');
+            });
+
+            $(".filter-loader").show();
+            getAjax('@Url.Action("GetFilters")', { }, function (response, ct) {
+                if (ct == 'html') {
+                    $(".dashboard-filters").append(response);
+                    $(".filter-loader").hide();
+                    $(".toggle-placement").show();
+                }
+            });
+
+            // Product Data
+            $(".chart-loader").show();
+            getAjax('@Url.Action("GetCharts")', {isProductOrAsset : 1}, function (response, ct) {
+                if (ct == 'html') {
+                    $(".charts-section").append(response);
+                     $(".chart-loader").hide();
+                }
+            });
+
+            //slider details
+            $(".slider-loader").show();
+            getAjax('@Url.Action("GetSlidersData")', {}, function (response, ct) {
+                    if (ct == 'html') {
+                        $(".slider-details").empty();
+                        $(".slider-details").append(response);
+                         $(".slider-loader").hide();
+                    }
+            });
+
+
+            BindAssetDataTable();
+
+            BindCashFlowDataTable();
+
+            $("#cash_flow_refresh").click(function () {
+                BindCashFlowDataTable();
+            });
+
+            $("#asset_refresh").click(function () {
+                BindAssetDataTable();
+            });
+        });
+
+        // Switch toggle
+        $(document).on('click', '#toggle_products_assets', function () {
+            if ($("#toggle_products_assets").prop("checked") == true) {
+                // Product Data
+                $(".chart-loader").show();
+                 $(".charts-section").animate({opacity: 0.2});
+                getAjax('@Url.Action("GetCharts")', {isProductOrAsset : 1}, function (response, ct) {
+                    if (ct == 'html') {
+                        $(".charts-section").empty();
+                        $(".charts-section").append(response);
+                        $(".chart-loader").hide();
+                         $(".charts-section").animate({opacity: 1});
+                    }
+                });
+            }
+            else if ($("#toggle_products_assets").prop("checked") == false) {
+                // Asset Data
+                $(".chart-loader").show();
+                $(".charts-section").animate({opacity: 0.2});
+                getAjax('@Url.Action("GetCharts")', {isProductOrAsset : 0}, function (response, ct) {
+                    if (ct == 'html') {
+                        $(".charts-section").empty();
+                        $(".charts-section").append(response);
+                        $(".chart-loader").hide();
+                        $(".charts-section").animate({opacity: 1});
+                    }
+                });
+            }
+        });
+
+        function BindAssetDataTable() {
+            $(".asset-data-table-loader").show();
+            $("#asset_datatable").empty();
+             $("#asset_datatable").DataTable({
+                 "dom": '<"wrapper"lftip>',
+                 processing: true,
+                 serverSide: true,
+                 destroy: true,
+                 pageLength: 25,
+                 aaSorting: [4, 'desc'],
+                 "sAjaxSource": "@Url.Action("GetAssetSummary")",
+                 columns: [
+                        { "title": 'Asset Class', "mData": "assetClass", "sName": 'assetClass' ,'Sortable': false},
+                     {
+                         "title": 'Value at cost', "mData": "valueAtCost", "sName": 'valueAtCost', 'Sortable': false, render: function (data, type, row) {
+                             if (row.valueAtCost=="") {
+                                 return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp 00.00</span>';
+                             } else {
+                                 return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp' + row.valueAtCost + '</span>';
+                             }
+                             }
+                     },
+                     {
+                       "title": 'Market Value', "mData": "marketValue", "sName": 'marketValue' ,'Sortable': false, render: function (data, type, row) {
+                             if (row.marketValue == "") {
+                                 return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp 00.00</span>';
+                             } else {
+                                 return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp' + row.marketValue + '</span>';
+                             }
+                             }
+                     },
+                        { "title": 'Weightage', "mData": "weightage", "sName": 'weightage','Sortable': false, 'orderable': false},
+                         {
+                            "title": 'Unrealized G/L', "mData": "unrealizedGL", "sName": 'createdTime','Sortable': false, 'orderable': false, render: function (data, type, row) {
+                                 if (row.unrealizedGL == "-") {
+                                     return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp 00.00</span>';
+                                 } else {
+                                     return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp' + row.unrealizedGL + '</span>';
+                                 }
+                                 }
+                         },
+                 ],
+             });
+            $(".asset-data-table-loader").hide();
+        }
+
+        function BindCashFlowDataTable() {
+            $(".cash-flow-datat-table-loader").show();
+            $("#Cash_flow_datatable").empty();
+             $("#Cash_flow_datatable").DataTable({
+                 "dom": '<"wrapper"lftip>',
+                 processing: true,
+                 serverSide: true,
+                 destroy: true,
+                 pageLength: 25,
+                 aaSorting: [1, 'desc'],
+                 "sAjaxSource": "@Url.Action("GetCashFlowSummary")",
+                 columns: [
+                     { "title": 'Cash Flow', "mData": "cashFlow", "sName": 'cashFlow', 'Sortable': false },
+                     {
+                       "title": 'Amount In Crore', "mData": "amountInCrore", "sName": 'amountInCrore' ,'Sortable': false, render: function (data, type, row) {
+                          return '<span><i class="fa fa-inr" aria-hidden="true"></i>&nbsp'+ row.amountInCrore+'</span>';
+                       }
+                     }
+                    ],
+             });
+            $(".cash-flow-datat-table-loader").hide();
+        }
+
+        $(document).on("userValuesChanged", ".ui-dateRangeSlider", function(e, data){
+          console.log("Something moved. min: " + data.values.min + " max: " + data.values.max);
+        });
+
+        $(document).on("change", "#txt_report_date", function () {
+            var data_array = $("#txt_report_date").val().split('-');
+            var from_date =(data_array[0]);
+            var to_date =(data_array[1]);
+        });
+    </script>
+}
